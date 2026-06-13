@@ -43,6 +43,7 @@ https://github.com/user-attachments/assets/8dbbbc7e-63b1-4458-b7a7-1b58235b62b7
       3. Умные NPC персонажи с ИИ, способные слышать и взаимодействовать с user
       4. Анализ действий user и оценка работы
       5. DataBase со всеми 140 университетами Казахстана, сделанный через парсинг официальных сайтов
+<img width="960" height="1280" alt="photo_2026-02-28_17-17-12" src="https://github.com/user-attachments/assets/719cb3ca-81ef-4d39-8929-4c31df700a60" />
 
          
 4. **HealthCare AI website "AINALA"** 2026
@@ -61,6 +62,7 @@ https://github.com/user-attachments/assets/8dbbbc7e-63b1-4458-b7a7-1b58235b62b7
       11. pil - для ресайза и подготовки фото
       12. reportlab - для автоматической генерации медицинских заключений
 
+<img width="1494" height="697" alt="Снимок экрана 2026-01-17 152633" src="https://github.com/user-attachments/assets/7a12be12-d071-42f8-867e-5af340c929da" />
           
 5. **ALEMEDU** 2026
    1. Образовательная платформа, занявшая второе место в хакатоне Dacentrathon 5.0 Alem Plus 800.000T
@@ -73,6 +75,9 @@ https://github.com/user-attachments/assets/8dbbbc7e-63b1-4458-b7a7-1b58235b62b7
       6. Генерация заданий и экзамен с редактором экзаменов
       7. Прокторинг движения глаз, поворотов головы во время экзамена
       8. Интерактивные игры и викторины с ИИ
+<img width="1769" height="807" alt="Снимок экрана 2026-01-17 152649" src="https://github.com/user-attachments/assets/e30fdde7-59cf-4bb3-b2ad-c3796fe117e5" />
+
+
 
          
 6. **Modular AI-Robotics Station "MiniFab"** 2026
@@ -99,6 +104,7 @@ https://github.com/user-attachments/assets/8dbbbc7e-63b1-4458-b7a7-1b58235b62b7
       6. автономное поведение: система принятия решений на основе деревьев поведений (behavior trees) и условной логики
       7. hardware: бортовой управляющий компьютер Raspberry Pi, модульные контроллеры приводов, микрофоны и камеры
       8. логика и навигация: алгоритмы автономного обхода препятствий, невербальной обратной связи и синхронизации с таймлайном шоу
+<img width="1036" height="821" alt="photo_2026-03-29_20-14-01" src="https://github.com/user-attachments/assets/fa2417a4-269e-4bbb-8409-eb656a4ea5a2" />
 
 8. **AI Animator** 2026
    1. ИИ аниматор иллюстраций, занявший первое место на Infomatrix Asia 2026 AI ART
@@ -106,3 +112,4 @@ https://github.com/user-attachments/assets/8dbbbc7e-63b1-4458-b7a7-1b58235b62b7
       1. Генерация изображений по промту
       2. Оживление рисунков по промту
       3. Удобный сайт для загрузки и работы
+<img width="1823" height="1007" alt="Снимок экрана 2026-03-17 182939" src="https://github.com/user-attachments/assets/62c3b3fa-f3c5-4eb7-8d96-a7bb03ebaef7" />
