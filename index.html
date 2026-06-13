@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kiwi Robot Controller</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">raspberry pi uart controller</p>
+          <h1>Kiwi robot drive</h1>
+          <p class="lede">
+            Left joystick controls holonomic translation. Right joystick controls
+            angular velocity. Commands are streamed as <code>&lt;Vx,Vy,Om&gt;</code>
+            frames to <code>/dev/serial0</code>.
+          </p>
+        </div>
+        <div class="status-card" id="statusCard">
+          <span id="connectionDot" class="dot"></span>
+          <div>
+            <strong id="connectionText">Connecting</strong>
+            <small id="serialText">Checking serial status...</small>
+          </div>
+        </div>
+      </section>
+
+      <nav class="tabs" aria-label="Controller sections">
+        <button type="button" class="tab-button is-active" data-tab="drive">Drive</button>
+        <button type="button" class="tab-button" data-tab="animations">Animations</button>
+        <button type="button" class="tab-button" data-tab="project">Project</button>
+      </nav>
+
+      <section class="tab-panel is-active" id="driveTab">
+        <div class="demo-grid">
+        <div class="stage-card">
+          <canvas id="driveCanvas" width="900" height="720" aria-label="Kiwi drive command visualization"></canvas>
+        </div>
+
+        <aside class="control-card">
+          <div class="panel">
+            <h2>Translate</h2>
+            <div class="joystick" id="leftJoystick" role="application" aria-label="Translation joystick">
+              <div class="joystick-ring"></div>
+              <div class="axis x-axis"></div>
+              <div class="axis y-axis"></div>
+              <div class="joystick-stick" id="leftStick"></div>
+            </div>
+            <p class="hint">Drag in any direction. Up is positive <code>Vy</code>.</p>
+          </div>
+
+          <div class="panel">
+            <h2>Rotate</h2>
+            <div class="joystick rotate-only" id="rightJoystick" role="application" aria-label="Rotation joystick">
+              <div class="joystick-ring"></div>
+              <div class="axis x-axis"></div>
+              <div class="joystick-stick" id="rightStick"></div>
+            </div>
+            <p class="hint">Drag left or right to command <code>Om</code>.</p>
+          </div>
+
+          <div class="panel telemetry">
+            <h2>Command stream</h2>
+            <div class="readout">
+              <span>Serial Vx <strong id="vxValue">0.000</strong></span>
+              <span>Serial Vy <strong id="vyValue">0.000</strong></span>
+              <span>Serial Om <strong id="omValue">0.000</strong></span>
+              <span>Frame <strong id="frameValue">&lt;0.000,0.000,0.000&gt;</strong></span>
+            </div>
+            <button type="button" id="stopButton" class="stop-button">Stop</button>
+          </div>
+
+          <div class="panel telemetry">
+            <h2>Wheel effort</h2>
+            <div id="wheelTelemetry"></div>
+          </div>
+        </aside>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="animationsTab">
+        <div class="animation-grid">
+          <div class="animation-card panel">
+            <h2>Upload animation</h2>
+            <form id="animationUploadForm" class="upload-form">
+              <input type="file" id="animationFile" name="file" accept=".txt,text/plain">
+              <button type="submit" class="stop-button">Upload TXT</button>
+            </form>
+            <p class="hint">
+              Each line in the text file is sent as one frame to
+              <code>/dev/ttyUSB0</code> at <code>25 fps</code>, once.
+            </p>
+          </div>
+
+          <div class="animation-card panel">
+            <h2>Play animation</h2>
+            <label class="select-label" for="animationSelect">Animation file</label>
+            <select id="animationSelect"></select>
+            <div class="animation-actions">
+              <button type="button" id="playAnimationButton" class="stop-button">Play Once</button>
+              <button type="button" id="stopAnimationButton" class="secondary-button">Stop</button>
+            </div>
+          </div>
+
+          <div class="animation-card panel telemetry">
+            <h2>Animation status</h2>
+            <div class="readout">
+              <span>Port <strong id="animationPortValue">/dev/ttyUSB0</strong></span>
+              <span>Playback <strong id="animationPlaybackValue">Idle</strong></span>
+              <span>Frame <strong id="animationFrameValue">0 / 0</strong></span>
+              <span>Last sent <strong id="animationLastSentValue">None</strong></span>
+            </div>
+            <p class="hint" id="animationMessage">Upload a .txt animation file to begin.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="projectTab">
+        <div class="project-studio">
+          <aside class="project-sidebar panel">
+            <h2>Project</h2>
+            <label class="select-label" for="projectTitle">Title</label>
+            <input type="text" id="projectTitle" value="animatronic_show">
+
+            <label class="select-label" for="projectSelect">Saved project</label>
+            <select id="projectSelect"></select>
+
+            <div class="project-actions">
+              <button type="button" id="loadProjectButton" class="secondary-button">Load</button>
+              <button type="button" id="saveProjectButton" class="stop-button">Save JSON</button>
+            </div>
+
+            <div class="transport">
+              <button type="button" id="playProjectButton" class="transport-button">Play</button>
+              <button type="button" id="pauseProjectButton" class="transport-button">Pause</button>
+              <button type="button" id="resumeProjectButton" class="transport-button">Resume</button>
+              <button type="button" id="stopProjectButton" class="transport-button danger">Stop</button>
+            </div>
+
+            <div class="readout project-readout">
+              <span>Playhead <strong id="projectPlayheadValue">0.0s</strong></span>
+              <span>Duration <strong id="projectDurationValue">0.0s</strong></span>
+              <span>Status <strong id="projectStatusValue">Idle</strong></span>
+            </div>
+            <p class="hint" id="projectMessage">Create a timeline with up to three minutes of material.</p>
+            <button type="button" id="shutdownButton" class="transport-button danger shutdown-button">Shutdown Raspberry Pi</button>
+          </aside>
+
+          <section class="project-editor panel">
+            <div class="asset-uploads">
+              <form id="audioUploadForm" class="upload-form compact-upload">
+                <input type="file" id="audioFile" name="file" accept="audio/*,.mp3,.wav,.ogg,.flac,.m4a,.aac">
+                <button type="submit" class="secondary-button">Upload Audio</button>
+              </form>
+              <form id="projectAnimationUploadForm" class="upload-form compact-upload">
+                <input type="file" id="projectAnimationFile" name="file" accept=".txt,text/plain">
+                <button type="submit" class="secondary-button">Upload TXT</button>
+              </form>
+            </div>
+
+            <div class="block-builder">
+              <div>
+                <label class="select-label" for="blockType">Block</label>
+                <select id="blockType">
+                  <option value="animation">Animation + optional audio</option>
+                  <option value="audio">Audio only</option>
+                  <option value="python">Python script</option>
+                  <option value="wheelbase">Wheelbase rotation</option>
+                  <option value="prop_flip">Prop flip 0-2</option>
+                  <option value="prop_pulse">Prop 3 timed ON</option>
+                </select>
+              </div>
+              <div>
+                <label class="select-label" for="blockChannel">Channel</label>
+                <select id="blockChannel">
+                  <option value="0">Channel 1</option>
+                  <option value="1">Channel 2</option>
+                  <option value="2">Channel 3</option>
+                </select>
+              </div>
+              <div>
+                <label class="select-label" for="blockStart">Start</label>
+                <input type="number" id="blockStart" value="0" min="0" max="180" step="0.1">
+              </div>
+              <div>
+                <label class="select-label" for="blockDuration">Duration</label>
+                <input type="number" id="blockDuration" value="5" min="0.1" max="180" step="0.1">
+              </div>
+              <div class="block-param animation-param">
+                <label class="select-label" for="blockAnimation">Animation</label>
+                <select id="blockAnimation"></select>
+              </div>
+              <div class="block-param audio-param">
+                <label class="select-label" for="blockAudio">Audio</label>
+                <select id="blockAudio"></select>
+              </div>
+              <div class="block-param audio-param">
+                <label class="select-label" for="blockVolume">Volume x</label>
+                <input type="number" id="blockVolume" value="10" min="0" max="20" step="0.1">
+              </div>
+              <div class="block-param animation-param">
+                <label class="select-label" for="blockAudioOffset">Audio offset</label>
+                <input type="number" id="blockAudioOffset" value="0" min="-180" max="180" step="0.05">
+              </div>
+              <div class="block-param python-param">
+                <label class="select-label" for="blockScript">Script</label>
+                <select id="blockScript"></select>
+              </div>
+              <label class="flag-control python-param">
+                <input type="checkbox" id="blockBlocking" checked>
+                <span>Wait for script before continuing</span>
+              </label>
+              <div class="block-param wheelbase-param">
+                <label class="select-label" for="blockWheelDirection">Direction</label>
+                <select id="blockWheelDirection">
+                  <option value="left">Rotate left</option>
+                  <option value="right">Rotate right</option>
+                </select>
+              </div>
+              <div class="block-param wheelbase-param">
+                <label class="select-label" for="blockWheelMinSpeed">Min speed</label>
+                <input type="number" id="blockWheelMinSpeed" value="0.15" min="0" max="1" step="0.01">
+              </div>
+              <div class="block-param wheelbase-param">
+                <label class="select-label" for="blockWheelMaxSpeed">Max speed</label>
+                <input type="number" id="blockWheelMaxSpeed" value="0.45" min="0" max="1" step="0.01">
+              </div>
+              <div class="block-param wheelbase-param">
+                <label class="select-label" for="blockWheelBezier">Bezier easing</label>
+                <select id="blockWheelBezier">
+                  <option value="0.42,0,0.58,1">Ease in-out</option>
+                  <option value="0.33,0,0.67,1">Smoother</option>
+                  <option value="0.25,0.1,0.25,1">Ease</option>
+                  <option value="0,0,1,1">Linear</option>
+                </select>
+              </div>
+              <div class="block-param prop-flip-param">
+                <label class="select-label" for="blockPropFlipId">Prop ID</label>
+                <select id="blockPropFlipId">
+                  <option value="0">ID 0</option>
+                  <option value="1">ID 1</option>
+                  <option value="2">ID 2</option>
+                </select>
+              </div>
+              <button type="button" id="addBlockButton" class="stop-button">Add Block</button>
+              <button type="button" id="removeSelectedBlocksButton" class="secondary-button danger-button">Remove Selected</button>
+              <button type="button" id="cancelBlockEditButton" class="secondary-button block-edit-action">Cancel Edit</button>
+            </div>
+
+            <div class="timeline-shell">
+              <div class="timeline-ruler" id="timelineRuler"></div>
+              <div class="timeline-progress">
+                <div class="timeline-progress-fill" id="timelineProgressFill"></div>
+                <div class="timeline-playhead" id="timelinePlayhead"></div>
+              </div>
+              <div class="timeline" id="projectTimeline"></div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js?v=14"></script>
+  </body>
+</html>
