@@ -16,7 +16,11 @@ The list of projects which were made by our team members.
       7. Анимация через собственный программный движок
 
 
-https://github.com/user-attachments/assets/7ad3c487-d63b-4a67-ad6d-3c1601391cbe
+https://github.com/user-attachments/assets/7ad3c487-d63b-4a67-ad6d-3c1601391cbe    
+
+https://github.com/user-attachments/assets/8dbbbc7e-63b1-4458-b7a7-1b58235b62b7
+
+
 
 
          
