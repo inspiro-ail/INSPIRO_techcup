@@ -34,7 +34,13 @@ https://github.com/user-attachments/assets/8dbbbc7e-63b1-4458-b7a7-1b58235b62b7
       5. Llama2 7B - локальная LLM для генерации речи
       6. Raspberry Pi OS
 
-         
+        <img width="1008" height="696" alt="photo_2025-10-23_18-43-50" src="https://github.com/user-attachments/assets/075c4e56-b8c2-4fc9-b362-db48da73cd5e" />
+        
+
+https://github.com/user-attachments/assets/bc785be6-489d-4fd1-b92f-1dc3cede2a85
+
+
+ 
 3. **AI-powered VR career guidance simulator** 2026
    1. Виртуальная система профориентации с персональным ИИ, получила 2-ое место в качестве исследовательского проекта, а также сотрудничество с университетом Аризоны в Казахстане.
    2. Включает в себя:
@@ -75,7 +81,8 @@ https://github.com/user-attachments/assets/8dbbbc7e-63b1-4458-b7a7-1b58235b62b7
       6. Генерация заданий и экзамен с редактором экзаменов
       7. Прокторинг движения глаз, поворотов головы во время экзамена
       8. Интерактивные игры и викторины с ИИ
-<img width="1769" height="807" alt="Снимок экрана 2026-01-17 152649" src="https://github.com/user-attachments/assets/e30fdde7-59cf-4bb3-b2ad-c3796fe117e5" />
+<img width="1887" height="839" alt="Снимок экрана 2026-04-05 232517" src="https://github.com/user-attachments/assets/d2a2d4eb-952e-49e3-9bf7-e2c8b8ae0c45" />
+
 
 
 
@@ -105,6 +112,10 @@ https://github.com/user-attachments/assets/8dbbbc7e-63b1-4458-b7a7-1b58235b62b7
       7. hardware: бортовой управляющий компьютер Raspberry Pi, модульные контроллеры приводов, микрофоны и камеры
       8. логика и навигация: алгоритмы автономного обхода препятствий, невербальной обратной связи и синхронизации с таймлайном шоу
 <img width="1036" height="821" alt="photo_2026-03-29_20-14-01" src="https://github.com/user-attachments/assets/fa2417a4-269e-4bbb-8409-eb656a4ea5a2" />
+
+
+https://github.com/user-attachments/assets/7f833364-ffff-42cb-97da-12500d4e0490
+
 
 8. **AI Animator** 2026
    1. ИИ аниматор иллюстраций, занявший первое место на Infomatrix Asia 2026 AI ART
