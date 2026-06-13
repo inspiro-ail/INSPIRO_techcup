@@ -102,6 +102,7 @@ https://github.com/user-attachments/assets/8a870bef-96bb-4e28-8b93-7e0bf9f7a0dd
       6. сбор данных: пайплайн для записи демонстраций (dataset collection) в реальном времени для последующего обучения
       7. hardware: модульный корпус станции, сервоприводы манипулятора, контроллеры связи и сенсоры
       8. backend / ml engine: Python, PyTorch (в экосистеме LeRobot), библиотеки для работы с пространственным вводом 3D-мыши и видеопотоками с камер
+
 https://github.com/user-attachments/assets/da87c974-43fa-4b90-9961-e117cb9000be
 
 
