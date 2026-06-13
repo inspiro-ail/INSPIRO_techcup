@@ -51,6 +51,10 @@ https://github.com/user-attachments/assets/bc785be6-489d-4fd1-b92f-1dc3cede2a85
       5. DataBase со всеми 140 университетами Казахстана, сделанный через парсинг официальных сайтов
 <img width="960" height="1280" alt="photo_2026-02-28_17-17-12" src="https://github.com/user-attachments/assets/719cb3ca-81ef-4d39-8929-4c31df700a60" />
 
+
+https://github.com/user-attachments/assets/8a870bef-96bb-4e28-8b93-7e0bf9f7a0dd
+
+
          
 4. **HealthCare AI website "AINALA"** 2026
    1. Сайт для пре-диагностики различных кожных, глазных и дыхательных заболеваний
